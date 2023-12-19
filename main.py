@@ -19,27 +19,34 @@ cursor = db.cursor()
 
 api_key = "f5dd56508e67c163c95b7ed93bbc5dcb"
 
+    
+def get_weather_data(url):
+    try:
+        response = requests.get(url)
+        data = json.loads(response.text)
+        weather_data = data['main']
+        return weather_data
+    
+    except Exception as e:
+        print("Could not retrieve data from API", e)
+    
+    
+weather_data = get_weather_data(f"https://api.openweathermap.org/data/2.5/weather?q=london&appid={api_key}&units=metric")
 
-url = f"https://api.openweathermap.org/data/2.5/weather?q=london&appid={api_key}&units=metric"
 
-response = requests.get(url)    
-data = json.loads(response.text)
-df = pd.DataFrame(data['main'], index = [0])
-
-
-
-current_weather = data['main']
-current_weather
-
+#current_weather = data['main']
+#current_weather
+            
+        
 keys = []
 values = [] 
-
-def extract_key_values(weather_dict):
-    for key, value in weather_dict.items():
+        
+def extract_key_values(weather_data):
+    for key, value in weather_data.items():
         keys.append(key)
         values.append(value)
         
-extract_key_values(current_weather)
+extract_key_values(weather_data)
 
 
 # have this function run at certain intervals
@@ -50,8 +57,7 @@ def update_weather_data():
     
     
             
-scheduler = BlockingScheduler()
-scheduler.add_job(update_weather_data, 'cron', hour = 18, minute = 30)
-scheduler.start()
+#scheduler = BlockingScheduler()
+#scheduler.add_job(update_weather_data, 'cron', hour = 18, minute = 30)
+#scheduler.start()
 
-# automate so that it automatically fetches data, and adds to sql database
