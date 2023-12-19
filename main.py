@@ -32,7 +32,7 @@ current_weather = data['main']
 current_weather
 
 keys = []
-values = []
+values = [] 
 
 def extract_key_values(weather_dict):
     for key, value in weather_dict.items():
@@ -41,3 +41,14 @@ def extract_key_values(weather_dict):
         
 extract_key_values(current_weather)
 
+
+# have this function run at certain intervals
+def update_weather_data():
+    update = "UPDATE weather_pipeline SET temp = %s, feels_like = %s, temp_min = %s, temp_max = %s, pressure = %s, humidity = %s WHERE id = 001"  
+    cursor.execute(update, values)
+    db.commit()
+    
+    
+
+
+# automate so that it automatically fetches data, and adds to sql database
