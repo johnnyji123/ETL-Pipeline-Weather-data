@@ -4,6 +4,7 @@ import pandas as pd
 import polars as pl
 import json
 from apscheduler.schedulers.background import BlockingScheduler
+import smtplib
 
 db = mysql.connector.connect(
     
@@ -28,15 +29,21 @@ def get_weather_data(url):
         return weather_data
     
     except Exception as e:
-        print("Could not retrieve data from API", e)
-    
+        from_email = "weatherpipeline599@gmail.com"
+        to_email = "jj_johnny97@hotmail.com"
+        message = "Could not retrieve data from API",e
+
+        smtp_server = smtplib.SMTP("smtp.gmail.com", 587)
+        smtp_server.starttls()
+        smtp_server.login(from_email, "blxh lihh jomg blij")
+        smtp_server.sendmail(from_email, to_email, message)
+
+        
+        
     
 weather_data = get_weather_data(f"https://api.openweathermap.org/data/2.5/weather?q=london&appid={api_key}&units=metric")
 
 
-#current_weather = data['main']
-#current_weather
-            
         
 keys = []
 values = [] 
@@ -60,4 +67,5 @@ def update_weather_data():
 #scheduler = BlockingScheduler()
 #scheduler.add_job(update_weather_data, 'cron', hour = 18, minute = 30)
 #scheduler.start()
+
 
