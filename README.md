@@ -1,5 +1,7 @@
 ### Data Pipeline for Weather Data
 ### Overview: This project demonstrates the creation of a data pipeline for retrieving weather data from the OpenWeatherMap API, processing it, and storing it in a MySQL database. The pipeline is automated using the APScheduler library, ensuring regular updates of weather information.
+
+### Process
 * A call is made to OpenWeatherMap API to fetch weather data in London
 * This data is processed and stored in a MySQL database
 * SQL query is written to update the database with the current weather data
