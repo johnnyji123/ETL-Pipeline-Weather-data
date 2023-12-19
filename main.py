@@ -62,10 +62,10 @@ def update_weather_data():
     cursor.execute(update, values)
     db.commit()
     
-    
-            
-#scheduler = BlockingScheduler()
-#scheduler.add_job(update_weather_data, 'cron', hour = 18, minute = 30)
-#scheduler.start()
+
+      
+scheduler = BlockingScheduler()
+scheduler.add_job(update_weather_data, 'cron', hour = 18, minute = 30)
+scheduler.start()
 
 
