@@ -3,7 +3,7 @@ import mysql.connector
 import pandas as pd
 import polars as pl
 import json
-
+from apscheduler.schedulers.background import BlockingScheduler
 
 db = mysql.connector.connect(
     
@@ -49,6 +49,9 @@ def update_weather_data():
     db.commit()
     
     
-
+            
+scheduler = BlockingScheduler()
+scheduler.add_job(update_weather_data, 'cron', hour = 18, minute = 30)
+scheduler.start()
 
 # automate so that it automatically fetches data, and adds to sql database
