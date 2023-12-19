@@ -44,8 +44,6 @@ def get_weather_data(url):
 # Calling weather data
 weather_data = get_weather_data(f"https://api.openweathermap.org/data/2.5/weather?q=london&appid={api_key}&units=metric")
 
-
-        
 keys = []
 values = [] 
 
@@ -64,8 +62,7 @@ def update_weather_data():
     cursor.execute(update, values)
     db.commit()
     
-
-
+    
 # Automating the process - database automatically updated
 scheduler = BlockingScheduler()
 scheduler.add_job(update_weather_data, 'cron', hour = 18, minute = 30)
