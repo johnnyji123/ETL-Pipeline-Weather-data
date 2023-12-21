@@ -5,6 +5,7 @@
 * A call is made to OpenWeatherMap API to fetch weather data in London
 * This data is processed and stored in a MySQL database
 * SQL query is written to update the database with the current weather data
+* This project demonstrates the use of cron, a time-based job scheduler, to automate and schedule recurring tasks, such as running scripts, fetching data, and executing commands at specified intervals
 * APScheduler library is used to automate this process - The database will update with the current weather data every day at 6:30PM
 
 ### ETL error handling (Extract, Transform, Load)
